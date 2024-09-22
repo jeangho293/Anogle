@@ -1,6 +1,7 @@
 import { Inject, Service } from 'typedi';
 import { DddService } from '../../../libs/ddd';
-import { UserRepository } from '../infrastructure/repsoitory';
+import { UserRepository } from '../infrastructure/repository';
+import { FilteredUserSpec } from '../domain/specs';
 
 @Service()
 export class UserService extends DddService {
@@ -9,7 +10,8 @@ export class UserService extends DddService {
   }
 
   async signIn({ username, password }: { username: string; password: string }) {
-    const user = await this.userRepository.find({ username });
+    const user = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ username }));
+
     return 'test';
   }
 }
