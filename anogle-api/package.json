@@ -4,23 +4,29 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "start:dev": "ts-node-dev --respawn --transpile-only -r dotenv/config src/server.ts"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@koa/router": "^13.1.0",
     "dotenv": "^16.4.5",
     "http-graceful-shutdown": "^3.1.13",
     "koa": "^2.15.3",
     "mysql2": "^3.11.3",
     "reflect-metadata": "^0.2.2",
     "ts-node-dev": "^2.0.0",
+    "typedi": "^0.10.0",
     "typeorm": "^0.3.20",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/koa": "^2.15.0",
+    "@types/koa__router": "^12.0.4",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",

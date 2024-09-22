@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
-import { docs } from '../configs';
+import { docs } from '../../configs';
+import entities from './entities';
 
 const { username, password, database } = docs.mysql;
 
@@ -11,4 +12,5 @@ export const datasource = new DataSource({
   database,
   synchronize: true,
   logging: false,
+  entities,
 });
