@@ -27,6 +27,12 @@ export abstract class Aggregate {
   @DeleteDateColumn({ nullable: true })
   deletedAt!: Date;
 
-  @Column({ nullable: true })
+  @Column()
   deletedBy!: string;
+
+  // setTxId(txId: string) {
+  //   if (!this.createdBy) {
+  //     this.createdBy = txId;
+  //   }
+  //   this.updatedBy = txId;
 }

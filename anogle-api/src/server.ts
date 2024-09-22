@@ -2,9 +2,11 @@
 import 'reflect-metadata';
 import * as Koa from 'koa';
 import * as gracefulShutdown from 'http-graceful-shutdown';
+import * as koaBody from 'koa-bodyparser';
 import { docs } from './configs';
 import { datasource } from './databases/mysql';
 import { globalRouter } from './routes';
+import { dependencyInjectorMiddleware, uuidMiddleware } from './middlewares';
 
 (async () => {
   // database setting
@@ -13,6 +15,10 @@ import { globalRouter } from './routes';
   // server
   const app = new Koa();
 
+  app.use(uuidMiddleware);
+  app.use(dependencyInjectorMiddleware);
+
+  app.use(koaBody());
   app.use(globalRouter.middleware());
 
   const server = app.listen(docs.server.port, () => {
