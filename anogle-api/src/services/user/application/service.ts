@@ -10,8 +10,12 @@ export class UserService extends DddService {
   }
 
   async signIn({ username, password }: { username: string; password: string }) {
-    const user = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ username }));
+    const [user] = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ username }));
 
-    return 'test';
+    if (!user.validPassword(password)) {
+      // TODO: Boom 으로 교체 필요.
+      throw new Error('no password');
+    }
+    return user.getToken();
   }
 }
