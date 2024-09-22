@@ -1,4 +1,5 @@
 import { Inject, Service } from 'typedi';
+import { badRequest } from '@hapi/boom';
 import { DddService } from '../../../libs/ddd';
 import { UserRepository } from '../infrastructure/repository';
 import { FilteredUserSpec } from '../domain/specs';
@@ -13,8 +14,7 @@ export class UserService extends DddService {
     const [user] = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ username }));
 
     if (!user.validPassword(password)) {
-      // TODO: Boom 으로 교체 필요.
-      throw new Error('no password');
+      throw badRequest('no password');
     }
     return user.getToken();
   }

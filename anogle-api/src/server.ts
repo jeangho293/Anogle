@@ -6,7 +6,11 @@ import * as koaBody from 'koa-bodyparser';
 import { docs } from './configs';
 import { datasource } from './databases/mysql';
 import { globalRouter } from './routes';
-import { dependencyInjectorMiddleware, uuidMiddleware } from './middlewares';
+import {
+  dependencyInjectorMiddleware,
+  errorHandlerMiddleware,
+  uuidMiddleware,
+} from './middlewares';
 
 (async () => {
   // database setting
@@ -16,6 +20,7 @@ import { dependencyInjectorMiddleware, uuidMiddleware } from './middlewares';
   const app = new Koa();
 
   app.use(uuidMiddleware);
+  app.use(errorHandlerMiddleware);
   app.use(dependencyInjectorMiddleware);
 
   app.use(koaBody());
