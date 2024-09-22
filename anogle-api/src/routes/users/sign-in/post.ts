@@ -1,6 +1,6 @@
 import * as Router from '@koa/router';
 import * as Joi from 'joi';
-import type { DddContext } from '../../../libs/ddd/context';
+import type { DddContext } from '../../../libs/ddd';
 import { UserService } from '../../../services/user/application/service';
 
 const router = new Router();

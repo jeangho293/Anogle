@@ -8,9 +8,9 @@ import {
 } from 'typeorm';
 
 @Entity()
-export abstract class Aggregate {
+export abstract class Aggregate<T> {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id!: T;
 
   @CreateDateColumn()
   createdAt!: Date;
@@ -27,12 +27,13 @@ export abstract class Aggregate {
   @DeleteDateColumn({ nullable: true })
   deletedAt!: Date;
 
-  @Column()
+  @Column({ nullable: true })
   deletedBy!: string;
 
-  // setTxId(txId: string) {
-  //   if (!this.createdBy) {
-  //     this.createdBy = txId;
-  //   }
-  //   this.updatedBy = txId;
+  setTxId(txId: string) {
+    if (!this.createdBy) {
+      this.createdBy = txId;
+    }
+    this.updatedBy = txId;
+  }
 }

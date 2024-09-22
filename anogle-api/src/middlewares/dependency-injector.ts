@@ -1,5 +1,5 @@
 import type { Context } from 'koa';
-import { DddContext } from '../libs/ddd/context';
+import { DddContext } from '../libs/ddd';
 
 export const dependencyInjectorMiddleware = async (ctx: Context, next: () => Promise<any>) => {
   const { txId } = ctx.state as { txId: string };
