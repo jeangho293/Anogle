@@ -10,7 +10,7 @@ import {
 @Entity()
 export abstract class Aggregate<T> {
   @PrimaryGeneratedColumn()
-  id!: T;
+  id!: number;
 
   @CreateDateColumn()
   createdAt!: Date;

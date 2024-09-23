@@ -12,7 +12,7 @@ export class Activity extends Aggregate<Activity> {
   isActivated!: boolean;
 
   @Column()
-  userId!: User['id'];
+  userId!: number;
 
   constructor(args: Creator) {
     super();

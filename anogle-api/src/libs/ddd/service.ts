@@ -8,5 +8,5 @@ export abstract class DddService {
   private context!: DddContext;
 
   @Inject()
-  protected transactionManager!: TransactionManager;
+  transactionManager!: TransactionManager;
 }

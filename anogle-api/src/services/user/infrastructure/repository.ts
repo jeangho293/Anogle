@@ -15,7 +15,7 @@ export class UserRepository extends DddRepository<User> {
     return spec.satisfyingCountFrom(this);
   }
 
-  private async find({ username }: { username?: string }) {
+  async find({ username }: { username?: string }) {
     return this.getManager.find(this.entityClass, {
       where: {
         username,
@@ -23,7 +23,7 @@ export class UserRepository extends DddRepository<User> {
     });
   }
 
-  private async count({ username }: { username?: string }) {
+  async count({ username }: { username?: string }) {
     return this.getManager.count(this.entityClass, {
       where: {
         username,

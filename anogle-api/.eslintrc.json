@@ -18,6 +18,7 @@
   },
   "ignorePatterns": ["node_modules/"],
   "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
     "class-methods-use-this": "off",
     "@typescript-eslint/no-empty-function": "off", // use function() {}
     "@typescript-eslint/no-empty-interface": "off", // use empty {}
