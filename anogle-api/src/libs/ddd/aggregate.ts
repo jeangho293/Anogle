@@ -12,22 +12,22 @@ export abstract class Aggregate<T> {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ select: false })
   createdAt!: Date;
 
-  @Column()
+  @Column({ select: false })
   createdBy!: string;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ select: false })
   updatedAt!: Date;
 
-  @Column()
+  @Column({ select: false })
   updatedBy!: string;
 
-  @DeleteDateColumn({ nullable: true })
+  @DeleteDateColumn({ nullable: true, select: false })
   deletedAt!: Date;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
   deletedBy!: string;
 
   setTxId(txId: string) {

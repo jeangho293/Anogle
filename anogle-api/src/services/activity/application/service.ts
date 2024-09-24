@@ -35,6 +35,7 @@ export class ActivityService extends DddService {
       new FilteredActivitySpec({ userId: user.id })
     );
 
+    console.log(activity);
     activity.active({ startedAt: '1', location: 'here' });
 
     await this.activityRepository.save([activity]);

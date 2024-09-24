@@ -18,7 +18,7 @@ router.patch('/users/:userId/activities/:activityId', async (ctx) => {
 
   const activityService = context.get(ActivityService);
 
-  await activityService.run;
+  await activityService.activate({ startedAt: '1 ' }, user);
   ctx.body = {};
 });
 
