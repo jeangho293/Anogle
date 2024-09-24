@@ -3,13 +3,16 @@ import { Aggregate } from '../../../libs/ddd';
 import type { User } from '../../user/domain/model';
 
 type Creator = {
-  userId: User['id'];
+  userId: number;
 };
 
 @Entity()
 export class Activity extends Aggregate<Activity> {
   @Column()
-  isActivated!: boolean;
+  startedAt!: string;
+
+  @Column()
+  location!: string;
 
   @Column()
   userId!: number;
@@ -17,12 +20,14 @@ export class Activity extends Aggregate<Activity> {
   constructor(args: Creator) {
     super();
     if (args) {
-      this.isActivated = false;
+      this.startedAt = '';
+      this.location = '';
       this.userId = args.userId;
     }
   }
 
-  active() {
-    this.isActivated = true;
+  active({ startedAt, location }: { startedAt: string; location: string }) {
+    this.startedAt = startedAt;
+    this.location = location;
   }
 }

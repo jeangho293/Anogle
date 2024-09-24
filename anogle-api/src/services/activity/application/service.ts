@@ -30,12 +30,12 @@ export class ActivityService extends DddService {
 
   // TODO: 시작시간 적용헤야함
   @Transaction()
-  async activate({ start }: { start: string }, user: User) {
+  async activate({ startedAt }: { startedAt: string }, user: User) {
     const [activity] = await this.activityRepository.findSatisfyingSpec(
       new FilteredActivitySpec({ userId: user.id })
     );
 
-    activity.active();
+    activity.active({ startedAt: '1', location: 'here' });
 
     await this.activityRepository.save([activity]);
   }
