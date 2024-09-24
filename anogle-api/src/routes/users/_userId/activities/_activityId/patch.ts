@@ -1,6 +1,8 @@
 import * as Router from '@koa/router';
 import * as Joi from 'joi';
-import { DddContext } from '../../../../../libs/ddd';
+import type { DddContext } from '../../../../../libs/ddd';
+import type { User } from '../../../../../services/user/domain/model';
+import { ActivityService } from '../../../../../services/activity/application/service';
 
 const router = new Router();
 
@@ -10,9 +12,13 @@ const paramsSchema = Joi.object<{ userId: string; activityId: string }>({
 });
 
 router.patch('/users/:userId/activities/:activityId', async (ctx) => {
-  const { context } = ctx.state as { context: DddContext };
+  const { context, user } = ctx.state as { context: DddContext; user: User };
 
-  const params = await paramsSchema.validateAsync(ctx.params);
+  const { activityId } = await paramsSchema.validateAsync(ctx.params);
+
+  const activityService = context.get(ActivityService);
+
+  await activityService.run;
   ctx.body = {};
 });
 

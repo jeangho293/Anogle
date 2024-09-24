@@ -4,6 +4,8 @@ import { UserRepository } from '../../user/infrastructure/repository';
 import { FilteredUserSpec } from '../../user/domain/specs';
 import { Activity } from '../domain/domain';
 import { ActivityRepository } from '../infrastructure/repository';
+import type { User } from '../../user/domain/model';
+import { FilteredActivitySpec } from '../domain/specs';
 
 @Service()
 export class ActivityService extends DddService {
@@ -24,5 +26,17 @@ export class ActivityService extends DddService {
     });
 
     await this.activityRepository.save(activities);
+  }
+
+  // TODO: 시작시간 적용헤야함
+  @Transaction()
+  async activate({ start }: { start: string }, user: User) {
+    const [activity] = await this.activityRepository.findSatisfyingSpec(
+      new FilteredActivitySpec({ userId: user.id })
+    );
+
+    activity.active();
+
+    await this.activityRepository.save([activity]);
   }
 }
