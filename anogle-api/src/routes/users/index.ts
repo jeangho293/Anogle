@@ -1,3 +1,4 @@
-import signInRoutes from './sign-in';
+import userIdRouter from './_userId';
+import signInRouter from './sign-in';
 
-export default [...signInRoutes];
+export default [...signInRouter, ...userIdRouter];
