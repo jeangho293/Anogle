@@ -1,7 +1,17 @@
+import { ThemeProvider } from "@emotion/react";
 import { AppRouter } from "./routes/routes";
+import { theme } from "./libs/theme";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./libs/react-query";
 
 function App() {
-  return <AppRouter />;
+  return (
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <AppRouter />
+      </QueryClientProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;
