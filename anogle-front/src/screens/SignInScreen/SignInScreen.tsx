@@ -2,8 +2,10 @@ import { Button, Stack, TextField } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
 import * as yup from "yup";
 import { PasswordInput } from "../../components";
+import { userRepository } from "../../repositories/user-repository";
 
 const bodySchema = yup.object({
   email: yup.string().required(),
@@ -17,6 +19,10 @@ function SignInScreen() {
       password: "",
     },
     resolver: yupResolver(bodySchema),
+  });
+
+  const data = useMutation({
+    mutationFn: userRepository.signIn,
   });
 
   return (
@@ -48,8 +54,9 @@ function SignInScreen() {
 
         <Stack direction="column" spacing={2} css={{ alignItems: "center" }}>
           <Button
-            onClick={handleSubmit(({ email, password }) => {
-              console.log(email, password);
+            onClick={handleSubmit(async ({ email, password }) => {
+              const a = await data.mutateAsync({ email, password });
+              console.log(a);
             })}
             css={{
               width: "100%",
@@ -58,7 +65,7 @@ function SignInScreen() {
               color: "#FFFFFF",
             }}
           >
-            Login
+            로그인
           </Button>
         </Stack>
       </Stack>
