@@ -1,7 +1,10 @@
-import * as axios from "axios";
+import { httpClient } from "../libs/axios";
 
 export const userRepository = {
   async signIn({ email, password }: { email: string; password: string }) {
-    return "hi";
+    return httpClient.post<{ token: string }>("/users/sign-in", {
+      email,
+      password,
+    });
   },
 };
