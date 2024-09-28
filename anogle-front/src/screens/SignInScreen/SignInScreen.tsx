@@ -21,7 +21,7 @@ function SignInScreen() {
     resolver: yupResolver(bodySchema),
   });
 
-  const data = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: userRepository.signIn,
   });
 
@@ -56,9 +56,8 @@ function SignInScreen() {
           <Button
             onClick={handleSubmit(async ({ email, password }) => {
               // TODO: libs로 이동시켜야겠다.
-              const a = data.mutate({ email, password });
-              console.log({ email, password });
-              console.log(a);
+              const token = await mutateAsync({ email, password });
+              console.log(token);
             })}
             css={{
               width: "100%",
