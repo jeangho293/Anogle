@@ -12,7 +12,7 @@ export class UserService extends DddService {
 
   async signIn({ email, password }: { email: string; password: string }) {
     const [user] = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ email }));
-
+    console.log(email, password);
     if (!user.validPassword(password)) {
       throw badRequest('no password');
     }
