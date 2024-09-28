@@ -1,4 +1,4 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import * as yup from "yup";
 import { PasswordInput } from "../../components";
 import { userRepository } from "../../repositories/user-repository";
+import Anogle from "../../assets/anolge.jpg";
 
 const bodySchema = yup.object({
   email: yup.string().required(),
@@ -26,12 +27,24 @@ function SignInScreen() {
   });
 
   return (
-    <Stack css={{ justifyContent: "center", alignItems: "center" }}>
+    <Stack
+      css={{
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "144px",
+      }}
+    >
       <Stack
         direction="column"
         spacing={4}
         css={{ width: "100%", maxWidth: "480px" }}
       >
+        <Typography
+          variant="h5"
+          css={{ color: "#FFFFFF", textAlign: "center" }}
+        >
+          Anogle에 오신 것을 환영합니다.
+        </Typography>
         <Stack direction="column" spacing={2}>
           <TextField
             {...register("email")}

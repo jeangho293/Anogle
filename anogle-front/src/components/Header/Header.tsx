@@ -1,29 +1,26 @@
-import { Button, Divider, Stack } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Button, Stack } from "@mui/material";
+import Anogle from "../../assets/anolge.jpg";
 
 function Header() {
   return (
-    <Stack>
-      <Stack css={{ backgroundColor: "#FFFFFF" }}>
-        <Stack direction="row" spacing={1}>
-          <Button>여기까지는 로고 그려야지</Button>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            css={{ color: "red", height: "60px" }}
+    <Stack css={{ padding: "8px 0px 8px 60px", backgroundColor: "#FFFFFF" }}>
+      <Stack direction="row" spacing={6}>
+        <Stack css={{ justifyContent: "center" }}>
+          <img
+            src={Anogle}
+            css={{
+              width: "48px",
+              height: "48px",
+            }}
           />
-          <Button css={{ backgroundColor: "red", color: "#000000" }}>
-            암장 출석
-          </Button>
-          <Button css={{ backgroundColor: "red", color: "#000000" }}>
-            암장 출석
-          </Button>
-          <Button css={{ backgroundColor: "red", color: "#000000" }}>
-            암장 출석
-          </Button>
+        </Stack>
+
+        <Stack spacing={2} direction="row">
+          <Button css={{ color: "#000000" }}>암장 출석</Button>
+          <Button css={{ color: "#000000" }}>암장 출석</Button>
+          <Button css={{ color: "#000000" }}>암장 출석</Button>
         </Stack>
       </Stack>
-      <Outlet />
     </Stack>
   );
 }
