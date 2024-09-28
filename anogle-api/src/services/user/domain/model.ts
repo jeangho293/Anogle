@@ -6,6 +6,9 @@ import { docs } from '../../../configs';
 @Entity()
 export class User extends Aggregate<User> {
   @Column()
+  email!: string;
+
+  @Column()
   username!: string;
 
   @Column()

@@ -5,8 +5,8 @@ import { UserService } from '../../../services/user/application/service';
 
 const router = new Router();
 
-const bodySchema = Joi.object<{ username: string; password: string }>({
-  username: Joi.string().required(),
+const bodySchema = Joi.object<{ email: string; password: string }>({
+  email: Joi.string().required(),
   password: Joi.string().required(),
 }).required();
 

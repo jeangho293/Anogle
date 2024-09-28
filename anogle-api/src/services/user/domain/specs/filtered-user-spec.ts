@@ -7,15 +7,19 @@ export class FilteredUserSpec implements UserSpec {
 
   private username?: string;
 
-  constructor({ id, username }: { id?: number; username?: string }) {
+  private email?: string;
+
+  constructor({ id, username, email }: { id?: number; username?: string; email?: string }) {
     this.id = id;
     this.username = username;
+    this.email = email;
   }
 
   async satisfyingElementFrom(userRepository: UserRepository): Promise<User[]> {
     return userRepository.find({
       id: this.id,
       username: this.username,
+      email: this.email,
     });
   }
 
@@ -23,6 +27,7 @@ export class FilteredUserSpec implements UserSpec {
     return userRepository.count({
       id: this.id,
       username: this.username,
+      email: this.email,
     });
   }
 }

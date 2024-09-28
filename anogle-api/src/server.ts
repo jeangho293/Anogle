@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import * as Koa from 'koa';
 import * as gracefulShutdown from 'http-graceful-shutdown';
 import * as koaBody from 'koa-bodyparser';
+import * as cors from '@koa/cors';
 import { docs } from './configs';
 import { datasource } from './databases/mysql';
 import { globalRouter } from './routes';
@@ -24,6 +25,7 @@ import {
   app.use(dependencyInjectorMiddleware);
 
   app.use(koaBody());
+  app.use(cors());
   app.use(globalRouter.middleware());
 
   const server = app.listen(docs.server.port, () => {

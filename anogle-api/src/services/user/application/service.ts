@@ -10,8 +10,8 @@ export class UserService extends DddService {
     super();
   }
 
-  async signIn({ username, password }: { username: string; password: string }) {
-    const [user] = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ username }));
+  async signIn({ email, password }: { email: string; password: string }) {
+    const [user] = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ email }));
 
     if (!user.validPassword(password)) {
       throw badRequest('no password');
