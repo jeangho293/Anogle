@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import * as yup from "yup";
 import { PasswordInput } from "../../components";
 import { userRepository } from "../../repositories/user-repository";
-import Anogle from "../../assets/anolge.jpg";
+import AnogleLogo from "../../assets/Anogle-Logo.svg";
 
 const bodySchema = yup.object({
   email: yup.string().required(),
@@ -34,15 +34,15 @@ function SignInScreen() {
         marginTop: "144px",
       }}
     >
+      <Stack css={{ alignItems: "center", marginBottom: "64px" }}>
+        <img src={AnogleLogo} css={{ width: "72px", height: "72px" }} />
+      </Stack>
       <Stack
         direction="column"
         spacing={4}
         css={{ width: "100%", maxWidth: "480px" }}
       >
-        <Typography
-          variant="h5"
-          css={{ color: "#FFFFFF", textAlign: "center" }}
-        >
+        <Typography variant="h5" css={{ textAlign: "center" }}>
           Anogle에 오신 것을 환영합니다.
         </Typography>
         <Stack direction="column" spacing={2}>
@@ -76,10 +76,9 @@ function SignInScreen() {
               width: "100%",
               maxWidth: "240px",
               backgroundColor: "rgb(79 70 229)",
-              color: "#FFFFFF",
             }}
           >
-            로그인
+            <Typography>로그인</Typography>
           </Button>
         </Stack>
       </Stack>

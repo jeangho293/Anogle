@@ -9,12 +9,14 @@ function SimpleLayout(props: { children: ReactNode }) {
   return (
     <Stack>
       <Header />
-      <Stack css={{ height: "100vh" }}>{children}</Stack>
+      <Stack css={{ height: "100%" }}>{children}</Stack>
     </Stack>
   );
 }
 
 function AuthorizedRoute() {
+  const token = localStorage.getItem("token");
+
   return (
     <SimpleLayout>
       <Outlet />

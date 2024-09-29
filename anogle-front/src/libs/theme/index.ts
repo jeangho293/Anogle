@@ -2,6 +2,14 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF",
+          opacity: 0.85,
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {

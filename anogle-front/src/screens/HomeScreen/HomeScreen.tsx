@@ -1,7 +1,11 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 function HomeScreen() {
-  return <Stack>hi</Stack>;
+  return (
+    <Stack>
+      <Typography>gui</Typography>
+    </Stack>
+  );
 }
 
 export { HomeScreen };

@@ -1,24 +1,30 @@
-import { Button, Stack } from "@mui/material";
-import Anogle from "../../assets/anolge.jpg";
+import { Button, Stack, Typography } from "@mui/material";
+import AnogleLogoSVG from "../../assets/Anogle-Logo.svg";
 
 function Header() {
   return (
-    <Stack css={{ padding: "8px 0px 8px 60px", backgroundColor: "#FFFFFF" }}>
+    <Stack css={{ padding: "8px 0px 8px 60px" }}>
       <Stack direction="row" spacing={6}>
         <Stack css={{ justifyContent: "center" }}>
           <img
-            src={Anogle}
+            src={AnogleLogoSVG}
             css={{
-              width: "48px",
-              height: "48px",
+              width: "32px",
+              height: "32px",
             }}
           />
         </Stack>
 
         <Stack spacing={2} direction="row">
-          <Button css={{ color: "#000000" }}>암장 출석</Button>
-          <Button css={{ color: "#000000" }}>암장 출석</Button>
-          <Button css={{ color: "#000000" }}>암장 출석</Button>
+          <Button>
+            <Typography>암장 출석</Typography>
+          </Button>
+          <Button>
+            <Typography>암장 출석</Typography>
+          </Button>
+          <Button>
+            <Typography>암장 출석</Typography>
+          </Button>
         </Stack>
       </Stack>
     </Stack>
