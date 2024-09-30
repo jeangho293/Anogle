@@ -1,4 +1,5 @@
 import { httpClient } from "../libs/axios";
+import { queryKeyMap } from "../libs/react-query";
 
 export const userRepository = {
   async signIn({ email, password }: { email: string; password: string }) {
@@ -8,3 +9,5 @@ export const userRepository = {
     });
   },
 };
+
+queryKeyMap.set(["User"], userRepository.signIn);
