@@ -10,7 +10,7 @@ function PasswordInput(props: TextFieldProps) {
   return (
     <TextField
       {...props}
-      placeholder="비밀번호"
+      placeholder="비밀번호"
       type={isShow ? "text" : "password"}
       slotProps={{
         input: {
