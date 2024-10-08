@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthorizedRoute, UnAuthorizedRoute } from "./components";
-import { SignInScreen } from "../screens";
+import { SignInScreen, HomeScreen } from "../screens";
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AuthorizedRoute />}>
-          <Route index />
+          <Route index element={<HomeScreen />} />
         </Route>
 
         {/* UnAuthorization */}
