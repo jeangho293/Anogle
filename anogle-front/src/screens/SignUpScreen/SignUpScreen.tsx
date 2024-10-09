@@ -33,7 +33,7 @@ function SignUpScreen() {
       </Typography>
 
       <Stack spacing="24px" css={{ width: "100%" }}>
-        <Stack direction="row">
+        <Stack direction="row" spacing="8px">
           <TextField
             placeholder="email"
             slotProps={{
@@ -46,7 +46,7 @@ function SignUpScreen() {
               },
             }}
           />
-          <Button>
+          <Button css={{ height: "36px", alignSelf: "center" }}>
             <Typography>Check</Typography>
           </Button>
         </Stack>

@@ -9,14 +9,14 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
 import LockSVG from "../../assets/mdi_lock.svg?react";
 import EyeOffSVG from "../../assets/mdi_eye-off.svg?react";
 import EyeSVG from "../../assets/mdi_eye.svg?react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
 
 const yupSchema = yup
   .object({
@@ -92,9 +92,9 @@ function SignInScreen() {
             onClick={handleSubmit(async ({ email, password }) => {
               console.log(email, password);
             })}
-            css={{ width: "160px", backgroundColor: "#855AFF" }}
+            css={{ width: "160px" }}
           >
-            <Typography css={{ color: "#FFFFFF" }}>Sign in</Typography>
+            <Typography>Sign in</Typography>
           </Button>
         </Stack>
       </Stack>
@@ -116,7 +116,13 @@ function SignInScreen() {
         spacing="16px"
         css={{ justifyContent: "space-between" }}
       >
-        <Button css={{ width: "160px", border: "thin solid #000000" }}>
+        <Button
+          css={{
+            width: "160px",
+            backgroundColor: "inherit",
+            border: "thin solid #000000",
+          }}
+        >
           <Typography css={{ color: "#000000" }}>Google</Typography>
         </Button>
         <Button css={{ width: "160px", backgroundColor: "#FFF500" }}>
