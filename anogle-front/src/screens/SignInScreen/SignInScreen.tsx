@@ -7,12 +7,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import AnogleLogoSVG from "../../assets/anogle_logo.svg";
-import EmailSVG from "../../assets/mdi_email.svg";
-import LockSVG from "../../assets/mdi_lock.svg";
-import EyeOffSVG from "../../assets/mdi_eye-off.svg";
-import EyeSVG from "../../assets/mdi_eye.svg";
 import { useState } from "react";
+import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
+import EmailSVG from "../../assets/mdi_email.svg?react";
+import LockSVG from "../../assets/mdi_lock.svg?react";
+import EyeOffSVG from "../../assets/mdi_eye-off.svg?react";
+import EyeSVG from "../../assets/mdi_eye.svg?react";
 
 function SignInScreen() {
   const [isShow, setIsShow] = useState(false);
@@ -26,7 +26,7 @@ function SignInScreen() {
         alignItems: "center",
       }}
     >
-      <img src={AnogleLogoSVG} />
+      <AnogleLogoSVG />
 
       <Typography css={{ fontSize: "24px", margin: "40px 0" }}>
         Sign in your account
@@ -38,7 +38,7 @@ function SignInScreen() {
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <img src={EmailSVG} />
+                  <EmailSVG />
                 </InputAdornment>
               ),
             },
@@ -50,13 +50,13 @@ function SignInScreen() {
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <img src={LockSVG} />
+                  <LockSVG />
                 </InputAdornment>
               ),
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={() => setIsShow(!isShow)}>
-                    <img src={isShow ? EyeSVG : EyeOffSVG} />
+                    {isShow ? <EyeSVG /> : <EyeOffSVG />}
                   </IconButton>
                 </InputAdornment>
               ),
