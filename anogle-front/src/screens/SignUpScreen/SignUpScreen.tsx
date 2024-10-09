@@ -1,0 +1,70 @@
+import {
+  Stack,
+  TextField,
+  Typography,
+  Button,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ArrowBackSVG from "../../assets/arrow_back.svg?react";
+import EmailSVG from "../../assets/mdi_email.svg?react";
+import LockSVG from "../../assets/mdi_lock.svg?react";
+
+function SignUpScreen() {
+  const navigator = useNavigate();
+  return (
+    <Stack
+      css={{
+        width: "100%",
+        maxWidth: "360px",
+        padding: "80px 60px 144px 60px",
+      }}
+    >
+      <Stack css={{ alignItems: "flex-start" }}>
+        <IconButton onClick={() => navigator(-1)}>
+          <ArrowBackSVG css={{ justifyContent: "flex-start" }} />
+        </IconButton>
+      </Stack>
+      <Typography
+        css={{ fontSize: "24px", textAlign: "center", margin: "32px 0" }}
+      >
+        Register new account
+      </Typography>
+
+      <Stack spacing="24px" css={{ width: "100%" }}>
+        <Stack direction="row">
+          <TextField
+            placeholder="email"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailSVG />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+          <Button>
+            <Typography>Check</Typography>
+          </Button>
+        </Stack>
+        <TextField
+          placeholder="password"
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockSVG />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+      </Stack>
+    </Stack>
+  );
+}
+
+export { SignUpScreen };

@@ -1,6 +1,12 @@
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#855AFF",
+      contrastText: "#FFFFFF",
+    },
+  },
   typography: {
     fontFamily: "Madimi One",
   },
@@ -29,10 +35,14 @@ export const theme = createTheme({
       },
     },
     MuiButton: {
+      defaultProps: {
+        variant: "contained",
+      },
       styleOverrides: {
         root: {
           textTransform: "inherit",
           padding: "8px 12px",
+          boxShadow: "none",
         },
       },
     },

@@ -8,14 +8,34 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import * as yup from "yup";
 import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
 import LockSVG from "../../assets/mdi_lock.svg?react";
 import EyeOffSVG from "../../assets/mdi_eye-off.svg?react";
 import EyeSVG from "../../assets/mdi_eye.svg?react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
+
+const yupSchema = yup
+  .object({
+    email: yup.string().required(),
+    password: yup.string().required(),
+  })
+  .required();
 
 function SignInScreen() {
   const [isShow, setIsShow] = useState(false);
+
+  const { register, handleSubmit } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: yupResolver(yupSchema),
+  });
 
   return (
     <Stack
@@ -34,6 +54,8 @@ function SignInScreen() {
 
       <Stack spacing="16px" css={{ width: "100%" }}>
         <TextField
+          {...register("email")}
+          placeholder="email"
           slotProps={{
             input: {
               startAdornment: (
@@ -45,6 +67,8 @@ function SignInScreen() {
           }}
         />
         <TextField
+          {...register("password")}
+          placeholder="password"
           type={isShow ? "text" : "password"}
           slotProps={{
             input: {
@@ -64,7 +88,12 @@ function SignInScreen() {
           }}
         />
         <Stack css={{ alignItems: "center" }}>
-          <Button css={{ width: "160px", backgroundColor: "#855AFF" }}>
+          <Button
+            onClick={handleSubmit(async ({ email, password }) => {
+              console.log(email, password);
+            })}
+            css={{ width: "160px", backgroundColor: "#855AFF" }}
+          >
             <Typography css={{ color: "#FFFFFF" }}>Sign in</Typography>
           </Button>
         </Stack>
@@ -107,7 +136,9 @@ function SignInScreen() {
       </Typography>
       <Typography css={{ fontSize: "16px" }}>
         need to{" "}
-        <a css={{ color: "#69AFEF", textDecoration: "underline" }}>sign up!</a>
+        <Link relative="path" to="../sign-up" css={{ color: "#69AFEF" }}>
+          sign up!
+        </Link>
       </Typography>
     </Stack>
   );
