@@ -1,7 +1,6 @@
 import {
   Button,
   Divider,
-  IconButton,
   InputAdornment,
   Stack,
   TextField,
@@ -13,10 +12,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
-import LockSVG from "../../assets/mdi_lock.svg?react";
-import EyeOffSVG from "../../assets/mdi_eye-off.svg?react";
-import EyeSVG from "../../assets/mdi_eye.svg?react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { PasswordTextField } from "../../components";
 
 const yupSchema = yup
   .object({
@@ -26,9 +23,7 @@ const yupSchema = yup
   .required();
 
 function SignInScreen() {
-  const [isShow, setIsShow] = useState(false);
-
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, control } = useForm({
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -66,25 +61,12 @@ function SignInScreen() {
             },
           }}
         />
-        <TextField
-          {...register("password")}
-          placeholder="password"
-          type={isShow ? "text" : "password"}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockSVG />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={() => setIsShow(!isShow)}>
-                    {isShow ? <EyeSVG /> : <EyeOffSVG />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            },
+
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { value, onChange } }) => {
+            return <PasswordTextField value={value} onChange={onChange} />;
           }}
         />
         <Stack css={{ alignItems: "center" }}>

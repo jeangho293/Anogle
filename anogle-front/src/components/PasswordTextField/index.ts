@@ -1,2 +1,1 @@
 export * from "./PasswordTextField";
-export * from "./SideMenuBar";

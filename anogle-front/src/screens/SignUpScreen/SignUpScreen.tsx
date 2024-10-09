@@ -7,12 +7,33 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm, Controller } from "react-hook-form";
 import ArrowBackSVG from "../../assets/arrow_back.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
-import LockSVG from "../../assets/mdi_lock.svg?react";
+import { PasswordTextField } from "../../components";
+
+const yupSchema = yup
+  .object({
+    email: yup.string().required(),
+    password: yup.string().required(),
+    confirmPassword: yup.string().required(),
+  })
+  .required();
 
 function SignUpScreen() {
   const navigator = useNavigate();
+
+  const { register, control, handleSubmit } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "23",
+      confirmPassword: "23",
+    },
+    resolver: yupResolver(yupSchema),
+  });
   return (
     <Stack
       css={{
@@ -35,6 +56,7 @@ function SignUpScreen() {
       <Stack spacing="24px" css={{ width: "100%" }}>
         <Stack direction="row" spacing="8px">
           <TextField
+            {...register("email")}
             placeholder="email"
             slotProps={{
               input: {
@@ -50,18 +72,38 @@ function SignUpScreen() {
             <Typography>Check</Typography>
           </Button>
         </Stack>
-        <TextField
-          placeholder="password"
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockSVG />
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
+
+        {/* password input */}
+        <Stack spacing="8px">
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { value, onChange } }) => {
+              return <PasswordTextField value={value} onChange={onChange} />;
+            }}
+          />
+
+          <Controller
+            control={control}
+            name="confirmPassword"
+            render={({ field: { value, onChange } }) => {
+              return (
+                <PasswordTextField
+                  isConfirm
+                  value={value}
+                  onChange={onChange}
+                />
+              );
+            }}
+          />
+        </Stack>
+        <Button
+          onClick={handleSubmit(({ email, password, confirmPassword }) => {
+            console.log(email, password);
+          })}
+        >
+          <Typography>Register</Typography>
+        </Button>
       </Stack>
     </Stack>
   );
