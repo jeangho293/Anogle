@@ -13,6 +13,7 @@ import { useForm, Controller } from "react-hook-form";
 import ArrowBackSVG from "../../assets/arrow_back.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
 import { PasswordTextField } from "../../components";
+import { userRepository } from "../../repositories";
 
 const yupSchema = yup
   .object({
@@ -98,9 +99,11 @@ function SignUpScreen() {
           />
         </Stack>
         <Button
-          onClick={handleSubmit(({ email, password, confirmPassword }) => {
-            console.log(email, password);
-          })}
+          onClick={handleSubmit(
+            async ({ email, password, confirmPassword }) => {
+              await userRepository.signUp({ email, password, confirmPassword });
+            }
+          )}
         >
           <Typography>Register</Typography>
         </Button>

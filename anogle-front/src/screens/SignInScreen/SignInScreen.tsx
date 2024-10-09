@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
@@ -14,6 +13,7 @@ import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
 import { useForm, Controller } from "react-hook-form";
 import { PasswordTextField } from "../../components";
+import { userRepository } from "../../repositories";
 
 const yupSchema = yup
   .object({
@@ -72,7 +72,7 @@ function SignInScreen() {
         <Stack css={{ alignItems: "center" }}>
           <Button
             onClick={handleSubmit(async ({ email, password }) => {
-              console.log(email, password);
+              await userRepository.signIn({ email, password });
             })}
             css={{ width: "160px" }}
           >
