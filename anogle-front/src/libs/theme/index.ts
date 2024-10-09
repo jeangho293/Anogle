@@ -28,5 +28,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "inherit",
+          padding: "8px 12px",
+        },
+      },
+    },
   },
 });

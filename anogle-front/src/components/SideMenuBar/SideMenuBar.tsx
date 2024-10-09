@@ -1,45 +1,45 @@
 import { Stack, Button, Typography } from "@mui/material";
-import SimpleAnogleLogoSVG from "../../assets/simple-logo.svg";
-import HomeSVG from "../../assets/mdi_home.svg";
+import SimpleAnogleLogoSVG from "../../assets/simple-logo.svg?react";
+import HomeSVG from "../../assets/mdi_home.svg?react";
+import CalendarSVG from "../../assets/mdi_calendar.svg?react";
+import { ReactNode } from "react";
+
+function MenuButton(props: {
+  children: string;
+  IconSVG: ReactNode;
+  onClick?: () => void;
+}) {
+  const { children, IconSVG, onClick } = props;
+
+  return (
+    <Button
+      startIcon={IconSVG}
+      onClick={onClick}
+      css={{
+        justifyContent: "flex-start",
+        backgroundColor: "inherit",
+        "&:hover": {
+          backgroundColor: "#7C2ACD",
+        },
+      }}
+    >
+      <Typography css={{ color: "#FFFFFF", fontSize: "20px" }}>
+        {children}
+      </Typography>
+    </Button>
+  );
+}
 
 function SideMenuBar() {
   return (
     <Stack
       css={{ height: "100vh", backgroundColor: "#855AFF", padding: "32px" }}
     >
-      <img src={SimpleAnogleLogoSVG} css={{ width: "60px", height: "45px" }} />
+      <SimpleAnogleLogoSVG />
 
-      <Stack spacing="16px" css={{ marginTop: "48px" }}>
-        <Button
-          startIcon={
-            <img src={HomeSVG} css={{ width: "24px", height: "24px" }} />
-          }
-          css={{
-            padding: "8px 12px",
-            justifyContent: "flex-start",
-            backgroundColor: "inherit",
-            "&:hover": {
-              backgroundColor: "#7C2ACD",
-            },
-          }}
-        >
-          <Typography css={{ color: "#FFFFFF", fontSize: "16px" }}>
-            Home
-          </Typography>
-        </Button>
-        <Button
-          css={{
-            justifyContent: "flex-start",
-            backgroundColor: "inherit",
-            "&:hover": {
-              backgroundColor: "#7C2ACD",
-            },
-          }}
-        >
-          <Typography css={{ color: "#FFFFFF", fontSize: "16px" }}>
-            schedule
-          </Typography>
-        </Button>
+      <Stack spacing="8px" css={{ marginTop: "48px" }}>
+        <MenuButton IconSVG={<HomeSVG />}>Home</MenuButton>
+        <MenuButton IconSVG={<CalendarSVG />}>Schedule</MenuButton>
       </Stack>
     </Stack>
   );
