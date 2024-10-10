@@ -1,12 +1,26 @@
-import { Button, ButtonProps, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import SimpleLogoSVG from "../../assets/simple-logo.svg?react";
 import DownArrowSVG from "../../assets/mdi_menu-down.svg?react";
-import { useUser } from "../../libs";
+import { useSignOut, useUser } from "../../libs";
+import { ReactNode, useState } from "react";
+import LogoutIcon from "../../assets/logout-icon.svg?react";
 
-function MenuButton(props: ButtonProps) {
-  const { children } = props;
+function MenuButton(props: { children: ReactNode; to: string }) {
+  // props destructure
+  const { children, to } = props;
+  const navigator = useNavigate();
+
   return (
     <Button
+      onClick={() => navigator(to)}
       css={{
         height: "32px",
         backgroundColor: "inherit",
@@ -22,7 +36,11 @@ function MenuButton(props: ButtonProps) {
 }
 
 function Header() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   const [user] = useUser();
+  const signOut = useSignOut();
 
   return (
     <Stack
@@ -42,14 +60,48 @@ function Header() {
       <Stack spacing="24px" direction="row">
         <SimpleLogoSVG />
         <Stack spacing="4px" direction="row">
-          <MenuButton>Dashboard</MenuButton>
-          <MenuButton>Schedule</MenuButton>
+          <MenuButton to="/">Home</MenuButton>
+          <MenuButton to="/dashboard">Dashboard</MenuButton>
+          <MenuButton to="/schedule">Schedule</MenuButton>
         </Stack>
       </Stack>
       <Stack direction="row" css={{ alignItems: "center" }}>
         {/* TODO: 아바타 아이콘이 있으면 좋겠다. */}
-        <Typography css={{ width: "48px" }}>{user.username}</Typography>
-        <DownArrowSVG />
+        <Typography css={{ width: "48px", textOverflow: "ellipsis" }}>
+          {user.username}
+        </Typography>
+
+        {/* TODO: 여기는 컴포넌트화 시키는게 좋을 듯. */}
+        <IconButton
+          id="profile-button"
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+        >
+          <DownArrowSVG />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={() => setAnchorEl(null)}
+          MenuListProps={{
+            "aria-labelledby": "profile-button",
+          }}
+          css={{
+            "& .MuiPaper-root": {
+              minWidth: "120px",
+            },
+          }}
+        >
+          <MenuItem onClick={() => signOut()}>
+            <Stack
+              spacing="8px"
+              direction="row"
+              css={{ alignItems: " center" }}
+            >
+              <LogoutIcon />
+              <Typography css={{ fontSize: "14px" }}>Logout</Typography>
+            </Stack>
+          </MenuItem>
+        </Menu>
       </Stack>
     </Stack>
   );

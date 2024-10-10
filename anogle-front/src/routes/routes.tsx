@@ -1,6 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthorizedRoute, UnAuthorizedRoute } from "./components";
-import { SignInScreen, HomeScreen, SignUpScreen } from "../screens";
+import {
+  SignInScreen,
+  HomeScreen,
+  SignUpScreen,
+  DashboardScreen,
+} from "../screens";
 
 function AppRouter() {
   return (
@@ -9,6 +14,7 @@ function AppRouter() {
         {/* Authorization */}
         <Route element={<AuthorizedRoute />}>
           <Route index element={<HomeScreen />} />
+          <Route path="dashboard" element={<DashboardScreen />} />
         </Route>
 
         {/* UnAuthorization */}

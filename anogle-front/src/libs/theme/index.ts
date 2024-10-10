@@ -27,6 +27,9 @@ export const theme = createTheme({
       },
     },
     MuiIconButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
       styleOverrides: {
         root: {
           padding: "4px",
@@ -45,6 +48,14 @@ export const theme = createTheme({
           textTransform: "inherit",
           padding: "8px 12px",
           boxShadow: "none",
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        list: {
+          paddingTop: 0,
+          paddingBottom: 0,
         },
       },
     },
