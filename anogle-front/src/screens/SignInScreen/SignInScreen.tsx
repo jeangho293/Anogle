@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
 import { useForm, Controller } from "react-hook-form";
-import { PasswordTextField } from "../../components";
+import { PasswordTextField, SocialLoginButtonGroup } from "../../components";
 import { userRepository } from "../../repositories";
 
 const yupSchema = yup
@@ -23,6 +23,8 @@ const yupSchema = yup
   .required();
 
 function SignInScreen() {
+  const navigator = useNavigate();
+
   const { register, handleSubmit, control } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -72,7 +74,12 @@ function SignInScreen() {
         <Stack css={{ alignItems: "center" }}>
           <Button
             onClick={handleSubmit(async ({ email, password }) => {
-              await userRepository.signIn({ email, password });
+              const { token } = await userRepository.signIn({
+                email,
+                password,
+              });
+              localStorage.setItem("token", token);
+              navigator("/");
             })}
             css={{ width: "160px" }}
           >
@@ -93,24 +100,7 @@ function SignInScreen() {
         or
       </Divider>
 
-      <Stack
-        direction="row"
-        spacing="16px"
-        css={{ justifyContent: "space-between" }}
-      >
-        <Button
-          css={{
-            width: "160px",
-            backgroundColor: "inherit",
-            border: "thin solid #000000",
-          }}
-        >
-          <Typography css={{ color: "#000000" }}>Google</Typography>
-        </Button>
-        <Button css={{ width: "160px", backgroundColor: "#FFF500" }}>
-          <Typography css={{ color: "#000000" }}>Kakao</Typography>
-        </Button>
-      </Stack>
+      <SocialLoginButtonGroup />
 
       <Typography
         css={{

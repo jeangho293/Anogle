@@ -2,7 +2,10 @@ import { httpClient } from "../libs";
 
 const userRepository = {
   async signIn({ email, password }: { email: string; password: string }) {
-    return httpClient.post("/users/sign-in", { email, password });
+    return httpClient.post<{ token: string }>("/users/sign-in", {
+      email,
+      password,
+    });
   },
 
   async signUp({
