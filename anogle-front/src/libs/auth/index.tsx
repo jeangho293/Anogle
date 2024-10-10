@@ -92,21 +92,26 @@ export function useUser() {
 }
 
 export function useSignIn() {
+  const [loading, setLoading] = useState(false);
   const context = useContext(UserContext);
 
   return [
     useCallback(
       ({ email, password }: { email: string; password: string }) => {
+        setLoading(true);
         loadToken(() =>
           authClient.post<{ token: string }>("/users/sign-in", {
             email,
             password,
           })
-        ).then(async () => {
-          context.setUser(await getSelf());
-        });
+        )
+          .then(async () => {
+            context.setUser(await getSelf());
+          })
+          .finally(() => setLoading(false));
       },
       [context]
     ),
+    loading,
   ];
 }
