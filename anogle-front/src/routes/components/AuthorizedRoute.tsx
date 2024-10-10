@@ -1,12 +1,12 @@
 import { Stack } from "@mui/material";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { SideMenuBar } from "../../components";
+import { useUser } from "../../libs";
 
 function AuthorizedRoute() {
-  if (!localStorage.getItem("token")) {
-    return <Navigate to="/sign-in" replace />;
-  }
+  const [user] = useUser();
 
+  console.log(user);
   return (
     <Stack direction="row">
       <Stack css={{ width: "100%", maxWidth: "240px" }}>

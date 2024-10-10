@@ -13,7 +13,7 @@ import AnogleLogoSVG from "../../assets/anogle_logo.svg?react";
 import EmailSVG from "../../assets/mdi_email.svg?react";
 import { useForm, Controller } from "react-hook-form";
 import { PasswordTextField, SocialLoginButtonGroup } from "../../components";
-import { userRepository } from "../../repositories";
+import { useSignIn } from "../../libs";
 
 const yupSchema = yup
   .object({
@@ -24,6 +24,7 @@ const yupSchema = yup
 
 function SignInScreen() {
   const navigator = useNavigate();
+  const [signIn] = useSignIn();
 
   const { register, handleSubmit, control } = useForm({
     mode: "onChange",
@@ -74,11 +75,7 @@ function SignInScreen() {
         <Stack css={{ alignItems: "center" }}>
           <Button
             onClick={handleSubmit(async ({ email, password }) => {
-              const { token } = await userRepository.signIn({
-                email,
-                password,
-              });
-              localStorage.setItem("token", token);
+              signIn({ email, password });
               navigator("/");
             })}
             css={{ width: "160px" }}

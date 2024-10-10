@@ -20,7 +20,7 @@ export const authMiddleware = async (ctx: Context, next: () => Promise<void>) =>
     const { userId } = verify(accessToken, docs.jwt.secret) as { userId: number };
     const userRepository = context.get(UserRepository);
 
-    const user = await userRepository.findSatisfyingSpec(new FilteredUserSpec({ id: userId }));
+    const [user] = await userRepository.findSatisfyingSpec(new FilteredUserSpec({ id: userId }));
     ctx.state.user = user;
   }
 
