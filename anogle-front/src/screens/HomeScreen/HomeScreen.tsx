@@ -5,9 +5,11 @@ function HomeScreen() {
   const signOut = useSignOut();
 
   return (
-    <Stack css={{ maxWidth: "120px" }}>
+    <Stack css={{ height: "1400px" }}>
       home
-      <Button onClick={signOut}>signOut</Button>
+      <Stack>
+        <Button onClick={signOut}>signOut</Button>
+      </Stack>
     </Stack>
   );
 }

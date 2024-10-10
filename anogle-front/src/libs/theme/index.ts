@@ -37,6 +37,8 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: {
         variant: "contained",
+        disableElevation: true,
+        disableRipple: true,
       },
       styleOverrides: {
         root: {

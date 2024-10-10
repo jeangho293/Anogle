@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
-import { SideMenuBar } from "../../components";
 import { useUser } from "../../libs";
+import { Header } from "../../components";
 
 function AuthorizedRoute() {
   const [user] = useUser();
@@ -11,10 +11,9 @@ function AuthorizedRoute() {
   return !user ? (
     <Navigate to="/sign-in" />
   ) : (
-    <Stack direction="row">
-      <SideMenuBar />
-
-      <Stack css={{ width: "100%", height: "100vh" }}>
+    <Stack css={{ height: "100%" }}>
+      <Header />
+      <Stack css={{ width: "100%", overflow: "hidden" }}>
         <Outlet />
       </Stack>
     </Stack>
