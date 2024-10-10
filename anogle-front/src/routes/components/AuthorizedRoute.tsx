@@ -6,14 +6,17 @@ import { useUser } from "../../libs";
 function AuthorizedRoute() {
   const [user] = useUser();
 
+  console.log(user);
+
   return !user ? (
     <Navigate to="/sign-in" />
   ) : (
     <Stack direction="row">
-      <Stack css={{ width: "100%", maxWidth: "240px" }}>
-        <SideMenuBar />
+      <SideMenuBar />
+
+      <Stack css={{ width: "100%", height: "100vh" }}>
+        <Outlet />
       </Stack>
-      <Outlet />
     </Stack>
   );
 }

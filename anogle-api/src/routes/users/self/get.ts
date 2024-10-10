@@ -4,12 +4,14 @@ import type { User } from '../../../services/user/domain/model';
 const router = new Router();
 
 router.get('/users/self', async (ctx) => {
-  const { user } = ctx.state as { user: User };
+  const {
+    user: { username, email },
+  } = ctx.state as { user: User };
 
   ctx.body = {
     data: {
-      email: user.email,
-      username: user.username,
+      username,
+      email,
     },
   };
 });

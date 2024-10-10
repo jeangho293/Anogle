@@ -1,14 +1,14 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { useSignOut } from "../../libs";
 
 function HomeScreen() {
   const signOut = useSignOut();
 
   return (
-    <div>
+    <Stack css={{ maxWidth: "120px" }}>
       home
       <Button onClick={signOut}>signOut</Button>
-    </div>
+    </Stack>
   );
 }
 

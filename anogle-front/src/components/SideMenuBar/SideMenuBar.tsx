@@ -33,13 +33,18 @@ function MenuButton(props: {
 function SideMenuBar() {
   return (
     <Stack
-      css={{ height: "100vh", backgroundColor: "#855AFF", padding: "32px" }}
+      position="sticky"
+      css={{ width: "100%", maxWidth: "240px", height: "100vh", top: 0 }}
     >
-      <SimpleAnogleLogoSVG />
+      <Stack
+        css={{ height: "100%", backgroundColor: "#855AFF", padding: "32px" }}
+      >
+        <SimpleAnogleLogoSVG />
 
-      <Stack spacing="8px" css={{ marginTop: "48px" }}>
-        <MenuButton IconSVG={<HomeSVG />}>Home</MenuButton>
-        <MenuButton IconSVG={<CalendarSVG />}>Schedule</MenuButton>
+        <Stack spacing="8px" css={{ marginTop: "48px" }}>
+          <MenuButton IconSVG={<HomeSVG />}>Home</MenuButton>
+          <MenuButton IconSVG={<CalendarSVG />}>Schedule</MenuButton>
+        </Stack>
       </Stack>
     </Stack>
   );
