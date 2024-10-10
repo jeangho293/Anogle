@@ -25,7 +25,7 @@ const yupSchema = yup
 function SignInScreen() {
   const navigator = useNavigate();
   // TODO: loading 시간 지현에 따른 로딩바 만들자
-  const [signIn, loading] = useSignIn();
+  const [signIn, { loading }] = useSignIn();
 
   const { register, handleSubmit, control } = useForm({
     mode: "onChange",

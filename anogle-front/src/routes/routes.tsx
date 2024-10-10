@@ -6,6 +6,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Authorization */}
         <Route element={<AuthorizedRoute />}>
           <Route index element={<HomeScreen />} />
         </Route>

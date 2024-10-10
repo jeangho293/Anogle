@@ -1,8 +1,13 @@
 import { Stack } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useUser } from "../../libs";
 
 function UnAuthorizedRoute() {
-  return (
+  const [user] = useUser();
+
+  return user ? (
+    <Navigate to=".." relative="path" replace />
+  ) : (
     <Stack
       css={{
         width: "100%",

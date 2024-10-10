@@ -32,6 +32,10 @@ const httpClient = (() => {
       _authorization = token;
     },
 
+    resetAuthorization() {
+      _authorization = "";
+    },
+
     async get<T>(url: string): Promise<T> {
       return instance.get(url);
     },

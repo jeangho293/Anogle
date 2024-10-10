@@ -34,6 +34,11 @@ async function loadToken(query: () => Promise<{ token: string }>) {
   return !!token;
 }
 
+async function unloadToken() {
+  httpClient.resetAuthorization();
+  localStorage.removeItem("token");
+}
+
 export function AuthProvider({
   user: initialUser,
   children,
@@ -91,7 +96,10 @@ export function useUser() {
   return [user!];
 }
 
-export function useSignIn() {
+export function useSignIn(): [
+  ({ email, password }: { email: string; password: string }) => void,
+  { loading: boolean }
+] {
   const [loading, setLoading] = useState(false);
   const context = useContext(UserContext);
 
@@ -112,6 +120,12 @@ export function useSignIn() {
       },
       [context]
     ),
-    loading,
+    { loading },
   ];
+}
+
+export function useSignOut() {
+  return useCallback(() => {
+    unloadToken().then(() => window.location.reload());
+  }, []);
 }
