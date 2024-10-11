@@ -6,8 +6,6 @@ import { Header } from "../../components";
 function AuthorizedRoute() {
   const [user] = useUser();
 
-  console.log(user);
-
   return !user ? (
     <Navigate to="/sign-in" />
   ) : (
