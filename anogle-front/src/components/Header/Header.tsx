@@ -5,8 +5,9 @@ import {
   MenuItem,
   Stack,
   Typography,
+  Divider,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import SimpleLogoSVG from "../../assets/simple-logo.svg?react";
 import DownArrowSVG from "../../assets/mdi_menu-down.svg?react";
 import { useSignOut, useUser } from "../../libs";
@@ -16,21 +17,38 @@ import LogoutIcon from "../../assets/logout-icon.svg?react";
 function MenuButton(props: { children: ReactNode; to: string }) {
   // props destructure
   const { children, to } = props;
+
   const navigator = useNavigate();
+  const { pathname } = useLocation();
+
+  const matched = to === pathname;
 
   return (
     <Button
       onClick={() => navigator(to)}
       css={{
+        position: "relative",
         height: "32px",
         backgroundColor: "inherit",
         color: "#000000",
         "&:hover": {
           backgroundColor: "rgba(133, 90, 255, 0.15)",
+          borderRadius: matched ? "4px 4px 0 0" : "",
         },
       }}
     >
       {children}
+      {matched && (
+        <Divider
+          css={{
+            position: "absolute",
+            width: "100%",
+            top: "32px",
+            height: "2px",
+            backgroundColor: "rgba(133, 90, 255, 0.8)",
+          }}
+        />
+      )}
     </Button>
   );
 }
@@ -88,6 +106,8 @@ function Header() {
           css={{
             "& .MuiPaper-root": {
               minWidth: "120px",
+              boxShadow: "none",
+              border: "thin solid #000000",
             },
           }}
         >

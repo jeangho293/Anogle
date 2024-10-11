@@ -15,6 +15,7 @@ function AppRouter() {
         <Route element={<AuthorizedRoute />}>
           <Route index element={<HomeScreen />} />
           <Route path="dashboard" element={<DashboardScreen />} />
+          <Route path="schedule" element={<div>schedule</div>} />
         </Route>
 
         {/* UnAuthorization */}
