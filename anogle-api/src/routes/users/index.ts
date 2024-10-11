@@ -2,6 +2,7 @@ import * as Router from '@koa/router';
 import userIdRouter from './_userId';
 import selfRouter from './self';
 import signInRouter from './sign-in';
+import signUpRouter from './sign-up';
 import { authMiddleware } from '../../middlewares/auth';
 
 const publicUsersRouter = new Router();
@@ -16,6 +17,9 @@ privateUsersRouter
   );
 
 // NOTE: not need to auth.
-publicUsersRouter.use(...signInRouter.map((router) => router.routes()));
+publicUsersRouter.use(
+  ...signInRouter.map((router) => router.routes()),
+  ...signUpRouter.map((router) => router.routes())
+);
 
 export default [publicUsersRouter, privateUsersRouter];
