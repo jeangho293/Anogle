@@ -77,6 +77,7 @@ function SignInScreen() {
           <Button
             onClick={handleSubmit(async ({ email, password }) => {
               signIn({ email, password });
+              // TODO: success 할 경우에만 이동하게 만들어줘야함.
               navigator("/");
             })}
             css={{ width: "160px" }}

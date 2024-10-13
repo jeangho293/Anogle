@@ -13,6 +13,7 @@ import DownArrowSVG from "../../assets/mdi_menu-down.svg?react";
 import { useSignOut, useUser } from "../../libs";
 import { ReactNode, useState } from "react";
 import LogoutIcon from "../../assets/logout-icon.svg?react";
+import { ProfileButton } from "../ProfileButton";
 
 function MenuButton(props: { children: ReactNode; to: string }) {
   // props destructure
@@ -54,11 +55,7 @@ function MenuButton(props: { children: ReactNode; to: string }) {
 }
 
 function Header() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
   const [user] = useUser();
-  const signOut = useSignOut();
 
   return (
     <Stack
@@ -88,40 +85,7 @@ function Header() {
         <Typography css={{ width: "48px", textOverflow: "ellipsis" }}>
           {user.username}
         </Typography>
-
-        {/* TODO: 여기는 컴포넌트화 시키는게 좋을 듯. */}
-        <IconButton
-          id="profile-button"
-          onClick={(e) => setAnchorEl(e.currentTarget)}
-        >
-          <DownArrowSVG />
-        </IconButton>
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={() => setAnchorEl(null)}
-          MenuListProps={{
-            "aria-labelledby": "profile-button",
-          }}
-          css={{
-            "& .MuiPaper-root": {
-              minWidth: "120px",
-              boxShadow: "none",
-              border: "thin solid #000000",
-            },
-          }}
-        >
-          <MenuItem onClick={() => signOut()}>
-            <Stack
-              spacing="8px"
-              direction="row"
-              css={{ alignItems: " center" }}
-            >
-              <LogoutIcon />
-              <Typography css={{ fontSize: "14px" }}>Logout</Typography>
-            </Stack>
-          </MenuItem>
-        </Menu>
+        <ProfileButton />
       </Stack>
     </Stack>
   );
