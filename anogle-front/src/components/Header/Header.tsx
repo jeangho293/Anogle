@@ -1,27 +1,20 @@
-import {
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Stack,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Button, Stack, Typography, Divider } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import SimpleLogoSVG from "../../assets/simple-logo.svg?react";
-import DownArrowSVG from "../../assets/mdi_menu-down.svg?react";
-import { useSignOut, useUser } from "../../libs";
-import { ReactNode, useState } from "react";
-import LogoutIcon from "../../assets/logout-icon.svg?react";
+import { useUser } from "../../libs";
+import { ReactNode } from "react";
+
 import { ProfileButton } from "../ProfileButton";
 
 function MenuButton(props: { children: ReactNode; to: string }) {
   // props destructure
   const { children, to } = props;
 
+  // hooks
   const navigator = useNavigate();
   const { pathname } = useLocation();
 
+  // calculate values
   const matched = to === pathname;
 
   return (
@@ -55,6 +48,7 @@ function MenuButton(props: { children: ReactNode; to: string }) {
 }
 
 function Header() {
+  // hooks
   const [user] = useUser();
 
   return (
