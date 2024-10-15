@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { DddRepository } from '../../../libs/ddd/repository';
-import { User } from '../domain/model';
+import { type LoginType, User } from '../domain/model';
 import type { UserSpec } from '../domain/specs/user-spec';
 
 @Service()
@@ -15,22 +15,50 @@ export class UserRepository extends DddRepository<User> {
     return spec.satisfyingCountFrom(this);
   }
 
-  async find({ id, username, email }: { id?: number; username?: string; email?: string }) {
+  async find({
+    id,
+    username,
+    email,
+    type,
+    socialId,
+  }: {
+    id?: number;
+    username?: string;
+    email?: string;
+    type?: LoginType;
+    socialId?: string;
+  }) {
     return this.getManager.find(this.entityClass, {
       where: {
         id,
         username,
         email,
+        type,
+        socialId,
       },
     });
   }
 
-  async count({ id, username, email }: { id?: number; username?: string; email?: string }) {
+  async count({
+    id,
+    username,
+    email,
+    type,
+    socialId,
+  }: {
+    id?: number;
+    username?: string;
+    email?: string;
+    type?: LoginType;
+    socialId?: string;
+  }) {
     return this.getManager.count(this.entityClass, {
       where: {
         id,
         username,
         email,
+        type,
+        socialId,
       },
     });
   }

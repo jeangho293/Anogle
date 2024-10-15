@@ -3,7 +3,7 @@ import { badRequest } from '@hapi/boom';
 import { DddService } from '../../../libs/ddd';
 import { UserRepository } from '../infrastructure/repository';
 import { FilteredUserSpec } from '../domain/specs';
-import { User } from '../domain/model';
+import { LoginType, User } from '../domain/model';
 
 @Service()
 export class UserService extends DddService {
@@ -24,11 +24,13 @@ export class UserService extends DddService {
     username,
     password,
     confirmPassword,
+    type,
   }: {
     email: string;
     username: string;
     password: string;
     confirmPassword: string;
+    type: LoginType;
   }) {
     const [user] = await this.userRepository.findSatisfyingSpec(new FilteredUserSpec({ email }));
 
@@ -36,8 +38,7 @@ export class UserService extends DddService {
       throw badRequest(`${email} is already existed.`, { message: `${email} is already existed.` });
     }
 
-    const newUser = User.of({ email, username, password, confirmPassword });
-
+    const newUser = User.of({ email, username, password, confirmPassword, type });
     await this.userRepository.save([newUser]);
   }
 }

@@ -129,12 +129,15 @@ export function useKaKaoLogin(): [
   { loading: boolean }
 ] {
   const [loading, setLoading] = useState(false);
+  const context = useContext(UserContext);
 
   return [
     useCallback(({ code }: { code: string }) => {
       setLoading(true);
       loadToken(() => authClient.post("/auth/kakao", { code }))
-        .then(() => console.log("hi"))
+        .then(async () => {
+          context.setUser(await getSelf());
+        })
         .finally(() => setLoading(false));
     }, []),
     { loading },

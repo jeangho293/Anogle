@@ -17,7 +17,7 @@ function KaKaoLoginScreen() {
 
   // calculate values
 
-  return <div>hi</div>;
+  return <div>{loading}</div>;
 }
 
 export { KaKaoLoginScreen };

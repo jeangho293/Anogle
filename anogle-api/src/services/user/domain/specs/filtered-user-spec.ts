@@ -1,5 +1,5 @@
 import { UserRepository } from '../../infrastructure/repository';
-import { User } from '../model';
+import type { LoginType, User } from '../model';
 import { UserSpec } from './user-spec';
 
 export class FilteredUserSpec implements UserSpec {
@@ -9,10 +9,28 @@ export class FilteredUserSpec implements UserSpec {
 
   private email?: string;
 
-  constructor({ id, username, email }: { id?: number; username?: string; email?: string }) {
+  private type?: LoginType;
+
+  private socialId?: string;
+
+  constructor({
+    id,
+    username,
+    email,
+    type,
+    socialId,
+  }: {
+    id?: number;
+    username?: string;
+    email?: string;
+    type?: LoginType;
+    socialId?: string;
+  }) {
     this.id = id;
     this.username = username;
     this.email = email;
+    this.type = type;
+    this.socialId = socialId;
   }
 
   async satisfyingElementFrom(userRepository: UserRepository): Promise<User[]> {
@@ -20,6 +38,8 @@ export class FilteredUserSpec implements UserSpec {
       id: this.id,
       username: this.username,
       email: this.email,
+      type: this.type,
+      socialId: this.socialId,
     });
   }
 
@@ -28,6 +48,8 @@ export class FilteredUserSpec implements UserSpec {
       id: this.id,
       username: this.username,
       email: this.email,
+      type: this.type,
+      socialId: this.socialId,
     });
   }
 }

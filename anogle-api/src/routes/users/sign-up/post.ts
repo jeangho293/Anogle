@@ -6,7 +6,7 @@ import { UserService } from '../../../services/user/application/service';
 const router = new Router();
 
 router.post('/users/sign-up', async (ctx) => {
-  const { context, user } = ctx.state as { context: DddContext; user: User };
+  const { context } = ctx.state as { context: DddContext; user: User };
 
   const { email, password, confirmPassword } = ctx.request.body as {
     email: string;
@@ -16,7 +16,7 @@ router.post('/users/sign-up', async (ctx) => {
 
   const userService = context.get(UserService);
 
-  await userService.signUp({ email, username: 'theo', password, confirmPassword });
+  await userService.signUp({ email, username: 'theo', password, confirmPassword, type: 'local' });
 
   ctx.status = 201;
   ctx.body = {};
