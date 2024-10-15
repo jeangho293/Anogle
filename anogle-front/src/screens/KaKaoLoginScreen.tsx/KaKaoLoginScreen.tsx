@@ -1,13 +1,23 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useKaKaoLogin } from "../../libs";
 
 function KaKaoLoginScreen() {
+  // state
+  const [kakaoLogin, { loading }] = useKaKaoLogin();
+
   // hooks
   const [searchParams, _] = useSearchParams();
 
-  // calculate values
-  const code = searchParams.get("code");
+  // effect, memo...
+  useEffect(() => {
+    const code = searchParams.get("code") || "";
+    kakaoLogin({ code });
+  }, [kakaoLogin, searchParams]);
 
-  return <div>{code}</div>;
+  // calculate values
+
+  return <div>hi</div>;
 }
 
 export { KaKaoLoginScreen };

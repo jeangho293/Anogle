@@ -124,6 +124,23 @@ export function useSignIn(): [
   ];
 }
 
+export function useKaKaoLogin(): [
+  ({ code }: { code: string }) => void,
+  { loading: boolean }
+] {
+  const [loading, setLoading] = useState(false);
+
+  return [
+    useCallback(({ code }: { code: string }) => {
+      setLoading(true);
+      loadToken(() => authClient.post("/auth/kakao", { code }))
+        .then(() => console.log("hi"))
+        .finally(() => setLoading(false));
+    }, []),
+    { loading },
+  ];
+}
+
 export function useSignOut() {
   return useCallback(() => {
     unloadToken().then(() => window.location.reload());

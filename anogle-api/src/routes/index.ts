@@ -1,4 +1,5 @@
 import * as Router from '@koa/router';
+import authRoutes from './auth';
 import usersRoutes from './users';
 import jobsRoutes from './jobs';
 
@@ -9,6 +10,7 @@ globalRouter.get('/ping', (ctx) => {
 });
 
 globalRouter.use(
+  ...authRoutes.map((router) => router.routes()),
   ...usersRoutes.map((router) => router.routes()),
   ...jobsRoutes.map((router) => router.routes())
 );
