@@ -5,6 +5,7 @@ import {
   HomeScreen,
   SignUpScreen,
   DashboardScreen,
+  KaKaoLoginScreen,
 } from "../screens";
 
 function AppRouter() {
@@ -22,6 +23,7 @@ function AppRouter() {
         <Route element={<UnAuthorizedRoute />}>
           <Route path="/sign-in" element={<SignInScreen />} />
           <Route path="/sign-up" element={<SignUpScreen />} />
+          <Route path="/auth/kakao" element={<KaKaoLoginScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>
