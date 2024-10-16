@@ -4,14 +4,12 @@ import { UserRepository } from '../../user/infrastructure/repository';
 import { KakaoClient } from '../../../libs/kakao';
 import { FilteredUserSpec } from '../../user/domain/specs';
 import { User } from '../../user/domain/model';
-import { GoogleClient } from '../../../libs/google';
 
 @Service()
 export class AuthService extends DddService {
   constructor(
     @Inject() private userRepository: UserRepository,
-    @Inject() private kakaoClient: KakaoClient,
-    @Inject() private googleClient: GoogleClient
+    @Inject() private kakaoClient: KakaoClient
   ) {
     super();
   }
@@ -40,9 +38,5 @@ export class AuthService extends DddService {
     await this.userRepository.save([newUser]);
 
     return { token: newUser.getToken() };
-  }
-
-  async signInGoogle({ accessToken }: { accessToken: string }) {
-    const a = await this.googleClient.signIn({ accessToken });
   }
 }

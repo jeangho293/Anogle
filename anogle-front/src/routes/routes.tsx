@@ -6,7 +6,6 @@ import {
   SignUpScreen,
   DashboardScreen,
   KaKaoLoginScreen,
-  GoogleLoginScreen,
 } from "../screens";
 
 function AppRouter() {
@@ -25,7 +24,6 @@ function AppRouter() {
           <Route path="/sign-in" element={<SignInScreen />} />
           <Route path="/sign-up" element={<SignUpScreen />} />
           <Route path="/auth/kakao" element={<KaKaoLoginScreen />} />
-          <Route path="/auth/google" element={<GoogleLoginScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>
