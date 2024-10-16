@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useKaKaoLogin } from "../../libs";
+import { CircularProgress } from "@mui/material";
 
 function KaKaoLoginScreen() {
   // state
@@ -17,7 +18,7 @@ function KaKaoLoginScreen() {
 
   // calculate values
 
-  return <div>{loading}</div>;
+  return loading ? <CircularProgress /> : <></>;
 }
 
 export { KaKaoLoginScreen };

@@ -9,7 +9,8 @@ import {
 } from "react";
 import type { UserModel } from "../../models/user-model";
 import { httpClient } from "../http-client";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const authClient = httpClient;
 
@@ -76,7 +77,17 @@ export function AuthProvider({
   }, [initialized]);
 
   if (!initialized) {
-    return <CircularProgress />;
+    return (
+      <Stack
+        css={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Stack>
+    );
   }
 
   return (
@@ -139,6 +150,28 @@ export function useKaKaoLogin(): [
           .then(async () => {
             context.setUser(await getSelf());
           })
+          .finally(() => setLoading(false));
+      },
+      [context]
+    ),
+    { loading },
+  ];
+}
+
+export function useGoogleLogin(): [
+  ({ accessToken }: { accessToken: string }) => void,
+  { loading: boolean }
+] {
+  const [loading, setLoading] = useState(false);
+
+  const context = useContext(UserContext);
+
+  return [
+    useCallback(
+      ({ accessToken }: { accessToken: string }) => {
+        setLoading(true);
+        loadToken(() => authClient.post("/auth/google", { accessToken }))
+          .then(async () => context.setUser(await getSelf()))
           .finally(() => setLoading(false));
       },
       [context]
