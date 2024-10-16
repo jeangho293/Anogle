@@ -158,6 +158,27 @@ export function useKaKaoLogin(): [
   ];
 }
 
+export function useGoogleLogin(): [
+  ({ code }: { code: string }) => void,
+  { loading: boolean }
+] {
+  const [loading, setLoading] = useState(false);
+  const context = useContext(UserContext);
+
+  return [
+    useCallback(
+      ({ code }) => {
+        setLoading(true);
+        loadToken(() => authClient.post("/auth/google", { code }))
+          .then(async () => context.setUser(await getSelf()))
+          .finally(() => setLoading(false));
+      },
+      [context]
+    ),
+    { loading },
+  ];
+}
+
 export function useSignOut() {
   return useCallback(() => {
     unloadToken().then(() => window.location.reload());

@@ -1,22 +1,18 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useKaKaoLogin } from "../../libs";
+import { useGoogleLogin } from "../../libs";
 import { CircularProgress } from "@mui/material";
 
-function KaKaoLoginScreen() {
-  // state
-  const [kakaoLogin, { loading }] = useKaKaoLogin();
-
-  // hooks
+function GoogleLoginScreen() {
+  const [googleLogin, { loading }] = useGoogleLogin();
   const [searchParams, _] = useSearchParams();
 
-  // effect, memo...
   useEffect(() => {
     const code = searchParams.get("code") || "";
-    kakaoLogin({ code });
-  }, [kakaoLogin, searchParams]);
+    googleLogin({ code });
+  }, [searchParams, googleLogin]);
 
   return loading ? <CircularProgress /> : <></>;
 }
 
-export { KaKaoLoginScreen };
+export { GoogleLoginScreen };

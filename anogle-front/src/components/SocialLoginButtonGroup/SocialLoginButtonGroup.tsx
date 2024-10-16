@@ -13,6 +13,7 @@ function SocialLoginButtonGroup() {
       css={{ justifyContent: "space-between" }}
     >
       <Button
+        href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientID}&response_type=code&scope=openid email&redirect_uri=${googleRedirectURI}`}
         css={{
           width: "160px",
           backgroundColor: "inherit",

@@ -18,7 +18,7 @@ export class KakaoClient {
         (config) => {
           return config.data;
         },
-        (err) => err
+        (err) => Promise.reject(err)
       );
     }
     return this.httpClient;
