@@ -30,8 +30,8 @@ function SignUpScreen() {
     mode: "onChange",
     defaultValues: {
       email: "",
-      password: "23",
-      confirmPassword: "23",
+      password: "",
+      confirmPassword: "",
     },
     resolver: yupResolver(yupSchema),
   });

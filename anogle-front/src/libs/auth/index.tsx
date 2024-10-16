@@ -132,14 +132,17 @@ export function useKaKaoLogin(): [
   const context = useContext(UserContext);
 
   return [
-    useCallback(({ code }: { code: string }) => {
-      setLoading(true);
-      loadToken(() => authClient.post("/auth/kakao", { code }))
-        .then(async () => {
-          context.setUser(await getSelf());
-        })
-        .finally(() => setLoading(false));
-    }, []),
+    useCallback(
+      ({ code }: { code: string }) => {
+        setLoading(true);
+        loadToken(() => authClient.post("/auth/kakao", { code }))
+          .then(async () => {
+            context.setUser(await getSelf());
+          })
+          .finally(() => setLoading(false));
+      },
+      [context]
+    ),
     { loading },
   ];
 }

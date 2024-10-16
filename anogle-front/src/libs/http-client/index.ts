@@ -24,7 +24,7 @@ const httpClient = (() => {
     },
     (err) => {
       // TODO: 에러가 발생할 경우 핸들링 좀 더 해야함. 서버에서 보내주는 에러를 사용해야하는 경우가 있음.
-      return err;
+      return Promise.reject(err);
     }
   );
   return {
