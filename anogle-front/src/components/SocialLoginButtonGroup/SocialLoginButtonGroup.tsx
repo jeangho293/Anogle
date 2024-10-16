@@ -1,4 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
+import KaKaoTalkSVG from "../../assets/kakao-talk.svg?react";
+import GoogleSVG from "../../assets/google.svg?react";
 
 const googleClientID = import.meta.env.VITE_GOOGLE_REST_API_KEY;
 const googleRedirectURI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
@@ -19,12 +21,14 @@ function SocialLoginButtonGroup() {
           backgroundColor: "inherit",
           border: "thin solid #000000",
         }}
+        startIcon={<GoogleSVG />}
       >
         <Typography css={{ color: "#000000" }}>Google</Typography>
       </Button>
       <Button
         href={`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientID}&redirect_uri=${kakaoRedirectURI}&response_type=code`}
         css={{ width: "160px", backgroundColor: "#FFF500" }}
+        startIcon={<KaKaoTalkSVG />}
       >
         <Typography css={{ color: "#000000" }}>Kakao</Typography>
       </Button>
