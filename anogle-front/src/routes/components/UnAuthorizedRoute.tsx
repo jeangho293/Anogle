@@ -6,7 +6,7 @@ function UnAuthorizedRoute() {
   const [user] = useUser();
 
   return user ? (
-    <Navigate to=".." relative="path" replace />
+    <Navigate to="../dashboard" relative="path" replace />
   ) : (
     <Stack
       css={{

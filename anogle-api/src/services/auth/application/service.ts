@@ -28,7 +28,7 @@ export class AuthService extends DddService {
       const token = user.getToken();
       return { token };
     }
-    // TODO: 에고 귀찮
+    // TODO: 에고 귀찮.. 비즈 앱해야 이메일 가져올 수 있음. 젠장
     const newUser = User.of({
       email: 'hi',
       username: 'theo',

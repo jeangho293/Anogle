@@ -1,4 +1,4 @@
-import { Button, Stack, Typography, Divider } from "@mui/material";
+import { Button, Stack, Typography, Divider, IconButton } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import SimpleLogoSVG from "../../assets/simple-logo.svg?react";
 import { useUser } from "../../libs";
@@ -21,7 +21,6 @@ function MenuButton(props: { children: ReactNode; to: string }) {
     <Button
       onClick={() => navigator(to)}
       css={{
-        position: "relative",
         height: "32px",
         backgroundColor: "inherit",
         color: "#000000",
@@ -50,6 +49,7 @@ function MenuButton(props: { children: ReactNode; to: string }) {
 function Header() {
   // hooks
   const [user] = useUser();
+  const navigator = useNavigate();
 
   return (
     <Stack
@@ -67,9 +67,10 @@ function Header() {
       }}
     >
       <Stack spacing="24px" direction="row">
-        <SimpleLogoSVG />
+        <IconButton onClick={() => navigator("/")}>
+          <SimpleLogoSVG />
+        </IconButton>
         <Stack spacing="4px" direction="row">
-          <MenuButton to="/">Home</MenuButton>
           <MenuButton to="/dashboard">Dashboard</MenuButton>
           <MenuButton to="/schedule">Schedule</MenuButton>
         </Stack>

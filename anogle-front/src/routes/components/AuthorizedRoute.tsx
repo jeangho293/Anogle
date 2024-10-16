@@ -11,7 +11,7 @@ function AuthorizedRoute() {
   ) : (
     <Stack css={{ height: "100%" }}>
       <Header />
-      <Stack css={{ width: "100%", overflow: "hidden" }}>
+      <Stack css={{ width: "100%" }}>
         <Outlet />
       </Stack>
     </Stack>

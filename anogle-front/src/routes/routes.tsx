@@ -1,8 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthorizedRoute, UnAuthorizedRoute } from "./components";
 import {
   SignInScreen,
-  HomeScreen,
   SignUpScreen,
   DashboardScreen,
   KaKaoLoginScreen,
@@ -15,8 +14,8 @@ function AppRouter() {
       <Routes>
         {/* Authorization */}
         <Route element={<AuthorizedRoute />}>
-          <Route index element={<HomeScreen />} />
-          <Route path="dashboard" element={<DashboardScreen />} />
+          <Route index element={<Navigate to="/dashboard" relative="path" />} />
+          <Route index path="dashboard" element={<DashboardScreen />} />
           <Route path="schedule" element={<div>schedule</div>} />
         </Route>
 

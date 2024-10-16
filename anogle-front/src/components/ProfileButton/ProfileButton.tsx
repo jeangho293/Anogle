@@ -1,11 +1,19 @@
-import { IconButton, Menu, MenuItem, Stack, Typography } from "@mui/material";
+import {
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { ReactNode, useState } from "react";
 import LogoutIcon from "../../assets/logout-icon.svg?react";
 import DownArrowSVG from "../../assets/mdi_menu-down.svg?react";
+import ProfileIcon from "../../assets/profile-icon.svg?react";
 import { useSignOut } from "../../libs";
 
 function DropDownMenuItem(props: {
-  icon: ReactNode;
+  icon?: ReactNode;
   name: string;
   onClick: () => void;
 }) {
@@ -53,6 +61,11 @@ function ProfileButton() {
           },
         }}
       >
+        <DropDownMenuItem
+          icon={<ProfileIcon />}
+          name="Profile"
+          onClick={() => {}}
+        />
         <DropDownMenuItem
           icon={<LogoutIcon />}
           name="Logout"
